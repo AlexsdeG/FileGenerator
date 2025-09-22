@@ -6,6 +6,7 @@ from consolemenu.items import FunctionItem, SubmenuItem
 from consolemenu.format import AsciiBorderStyle
 
 from file_generators.document_generator import generate_txt
+from file_generators.image_generator import generate_png, generate_jpg
 from utils import prompt_for_filename_and_size
 
 
@@ -20,14 +21,36 @@ def generate_txt_wrapper():
     input("\nPress Enter to continue...")
 
 
+def generate_png_wrapper():
+    """Wrapper function for PNG file generation"""
+    try:
+        filename, size_kb = prompt_for_filename_and_size()
+        generate_png(filename, size_kb)
+    except Exception as e:
+        print(f"Error generating PNG file: {e}")
+    
+    input("\nPress Enter to continue...")
+
+
+def generate_jpg_wrapper():
+    """Wrapper function for JPG file generation"""
+    try:
+        filename, size_kb = prompt_for_filename_and_size()
+        generate_jpg(filename, size_kb)
+    except Exception as e:
+        print(f"Error generating JPG file: {e}")
+    
+    input("\nPress Enter to continue...")
+
+
 def create_image_files_menu():
     """Create the Image Files sub-menu"""
     image_menu = ConsoleMenu("Image Files", "Select an image file type to generate:")
     image_menu.border_style = AsciiBorderStyle()
     
-    # Placeholder items for Phase 2
-    # image_menu.append_item(FunctionItem("Generate PNG File", generate_png_wrapper))
-    # image_menu.append_item(FunctionItem("Generate JPG File", generate_jpg_wrapper))
+    # Add PNG and JPG generation (Phase 2)
+    image_menu.append_item(FunctionItem("Generate PNG File", generate_png_wrapper))
+    image_menu.append_item(FunctionItem("Generate JPG File", generate_jpg_wrapper))
     
     return image_menu
 

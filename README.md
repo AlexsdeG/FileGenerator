@@ -32,14 +32,79 @@ python cli.py
 
 Navigate through the menu system to select the type of file you want to generate and specify the desired size.
 
+## Development Status
+
+### Phase 1: ✅ Complete
+- Core CLI functionality with console-menu
+- TXT file generation with random data
+- Basic utilities for file size handling
+- Input validation and error handling
+
+### Phase 2: ✅ Complete  
+- PNG file generation with valid headers
+- JPG file generation with valid headers
+- Precise file size control
+- Image format validation
+
+### Phase 3: 🔄 Pending
+- PDF file generation
+- DOCX file generation  
+- SVG vector file generation
+
+### Phase 4: 🔄 Pending
+- Advanced random data generation
+- Enhanced user input with size parsing (MB, GB)
+- Final documentation and testing
+
+## Testing
+
+Run the test scripts to verify functionality:
+```bash
+# Phase 1 tests
+python test_phase1.py
+
+# Phase 2 tests
+python test_phase2.py
+```
+
+## Demo
+
+Run demo scripts to see examples:
+```bash
+# Phase 1 demo
+python demo.py
+
+# Phase 2 demo  
+python demo_phase2.py
+```
+
 ## Development Plan
 
 This project is being developed in phases as outlined in `Plan.md`:
 
-- **Phase 1**: Core CLI functionality and TXT file generation
-- **Phase 2**: Image file generation (PNG, JPG)
+- **Phase 1**: Core CLI functionality and TXT file generation ✅
+- **Phase 2**: Image file generation (PNG, JPG) ✅
 - **Phase 3**: Complex document and vector file generation (PDF, DOCX, SVG)
 - **Phase 4**: Advanced features and finalization
+
+## File Structure
+
+```
+FileGenerator/
+├── Plan.md                    # Development plan with all phases
+├── README.md                  # Project documentation
+├── requirements.txt           # Dependencies
+├── cli.py                     # Main CLI script
+├── utils.py                   # Core utility functions
+├── demo.py                    # Phase 1 demonstration
+├── demo_phase2.py             # Phase 2 demonstration
+├── test_phase1.py             # Phase 1 testing
+├── test_phase2.py             # Phase 2 testing
+└── file_generators/
+    ├── __init__.py            # Python package marker
+    ├── document_generator.py  # Document file generation
+    └── image_generator.py    # Image file generation
+```
 
 ## Disclaimer
 
