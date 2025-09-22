@@ -3,18 +3,33 @@ import random
 import string
 
 
-def prompt_for_filename_and_size():
+def create_generated_folder():
+    """Create the 'generated' folder if it doesn't exist"""
+    generated_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generated")
+    os.makedirs(generated_folder, exist_ok=True)
+    return generated_folder
+
+
+def prompt_for_filename_and_size(default_extension=None):
     """
     Prompt the user for a filename and target size in kilobytes.
     
+    Args:
+        default_extension (str, optional): Default extension to append if none provided
+        
     Returns:
         tuple: (filename, size_kb) where filename is a string and size_kb is an integer
     """
     while True:
-        filename = input("Enter filename (with extension): ").strip()
+        filename = input("Enter filename: ").strip()
         if not filename:
             print("Error: Filename cannot be empty. Please try again.")
             continue
+        
+        # Add default extension if no extension is provided
+        if default_extension and '.' not in filename:
+            filename = f"{filename}.{default_extension}"
+            
         break
     
     while True:

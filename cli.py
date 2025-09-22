@@ -5,15 +5,16 @@ from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem, SubmenuItem
 from consolemenu.format import AsciiBorderStyle
 
-from file_generators.document_generator import generate_txt
+from file_generators.document_generator import generate_txt, generate_pdf, generate_docx
 from file_generators.image_generator import generate_png, generate_jpg
+from file_generators.vector_generator import generate_svg
 from utils import prompt_for_filename_and_size
 
 
 def generate_txt_wrapper():
     """Wrapper function for TXT file generation"""
     try:
-        filename, size_kb = prompt_for_filename_and_size()
+        filename, size_kb = prompt_for_filename_and_size(default_extension="txt")
         generate_txt(filename, size_kb)
     except Exception as e:
         print(f"Error generating TXT file: {e}")
@@ -24,7 +25,7 @@ def generate_txt_wrapper():
 def generate_png_wrapper():
     """Wrapper function for PNG file generation"""
     try:
-        filename, size_kb = prompt_for_filename_and_size()
+        filename, size_kb = prompt_for_filename_and_size(default_extension="png")
         generate_png(filename, size_kb)
     except Exception as e:
         print(f"Error generating PNG file: {e}")
@@ -35,10 +36,43 @@ def generate_png_wrapper():
 def generate_jpg_wrapper():
     """Wrapper function for JPG file generation"""
     try:
-        filename, size_kb = prompt_for_filename_and_size()
+        filename, size_kb = prompt_for_filename_and_size(default_extension="jpg")
         generate_jpg(filename, size_kb)
     except Exception as e:
         print(f"Error generating JPG file: {e}")
+    
+    input("\nPress Enter to continue...")
+
+
+def generate_pdf_wrapper():
+    """Wrapper function for PDF file generation"""
+    try:
+        filename, size_kb = prompt_for_filename_and_size(default_extension="pdf")
+        generate_pdf(filename, size_kb)
+    except Exception as e:
+        print(f"Error generating PDF file: {e}")
+    
+    input("\nPress Enter to continue...")
+
+
+def generate_docx_wrapper():
+    """Wrapper function for DOCX file generation"""
+    try:
+        filename, size_kb = prompt_for_filename_and_size(default_extension="docx")
+        generate_docx(filename, size_kb)
+    except Exception as e:
+        print(f"Error generating DOCX file: {e}")
+    
+    input("\nPress Enter to continue...")
+
+
+def generate_svg_wrapper():
+    """Wrapper function for SVG file generation"""
+    try:
+        filename, size_kb = prompt_for_filename_and_size(default_extension="svg")
+        generate_svg(filename, size_kb)
+    except Exception as e:
+        print(f"Error generating SVG file: {e}")
     
     input("\nPress Enter to continue...")
 
@@ -63,9 +97,9 @@ def create_document_files_menu():
     # Add TXT generation (Phase 1)
     document_menu.append_item(FunctionItem("Generate TXT File", generate_txt_wrapper))
     
-    # Placeholder items for Phase 3
-    # document_menu.append_item(FunctionItem("Generate PDF File", generate_pdf_wrapper))
-    # document_menu.append_item(FunctionItem("Generate DOCX File", generate_docx_wrapper))
+    # Add PDF and DOCX generation (Phase 3)
+    document_menu.append_item(FunctionItem("Generate PDF File", generate_pdf_wrapper))
+    document_menu.append_item(FunctionItem("Generate DOCX File", generate_docx_wrapper))
     
     return document_menu
 
@@ -75,8 +109,8 @@ def create_vector_files_menu():
     vector_menu = ConsoleMenu("Vector Files", "Select a vector file type to generate:")
     vector_menu.border_style = AsciiBorderStyle()
     
-    # Placeholder items for Phase 3
-    # vector_menu.append_item(FunctionItem("Generate SVG File", generate_svg_wrapper))
+    # Add SVG generation (Phase 3)
+    vector_menu.append_item(FunctionItem("Generate SVG File", generate_svg_wrapper))
     
     return vector_menu
 

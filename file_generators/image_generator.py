@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from PIL import Image
 from io import BytesIO
-from utils import generate_random_bytes
+from utils import generate_random_bytes, create_generated_folder
 
 
 def generate_png(file_path, size_kb):
@@ -15,6 +15,10 @@ def generate_png(file_path, size_kb):
         file_path (str): Path where the file will be saved
         size_kb (int): Target file size in kilobytes
     """
+    # Create generated folder and get full path
+    generated_folder = create_generated_folder()
+    full_path = os.path.join(generated_folder, file_path)
+    
     try:
         # Create a minimal 1x1 pixel black image
         img = Image.new('RGB', (1, 1), color='black')
@@ -34,7 +38,7 @@ def generate_png(file_path, size_kb):
         if remaining_bytes < 0:
             print(f"Warning: Requested size ({size_kb} KB) is smaller than minimum PNG header size.")
             # Just save the minimal image
-            with open(file_path, 'wb') as f:
+            with open(full_path, 'wb') as f:
                 f.write(header_bytes)
         else:
             # Generate random padding data (convert remaining bytes to KB for the function)
@@ -55,10 +59,10 @@ def generate_png(file_path, size_kb):
             final_data = header_bytes + padding_data
             
             # Write to file
-            with open(file_path, 'wb') as f:
+            with open(full_path, 'wb') as f:
                 f.write(final_data)
         
-        print(f"Successfully generated PNG file: {file_path} ({size_kb} KB)")
+        print(f"Successfully generated PNG file: {full_path} ({size_kb} KB)")
         
     except Exception as e:
         print(f"Error generating PNG file: {e}")
@@ -73,6 +77,10 @@ def generate_jpg(file_path, size_kb):
         file_path (str): Path where the file will be saved
         size_kb (int): Target file size in kilobytes
     """
+    # Create generated folder and get full path
+    generated_folder = create_generated_folder()
+    full_path = os.path.join(generated_folder, file_path)
+    
     try:
         # Create a minimal 1x1 pixel black image
         img = Image.new('RGB', (1, 1), color='black')
@@ -92,7 +100,7 @@ def generate_jpg(file_path, size_kb):
         if remaining_bytes < 0:
             print(f"Warning: Requested size ({size_kb} KB) is smaller than minimum JPEG header size.")
             # Just save the minimal image
-            with open(file_path, 'wb') as f:
+            with open(full_path, 'wb') as f:
                 f.write(header_bytes)
         else:
             # Generate random padding data (convert remaining bytes to KB for the function)
@@ -113,10 +121,10 @@ def generate_jpg(file_path, size_kb):
             final_data = header_bytes + padding_data
             
             # Write to file
-            with open(file_path, 'wb') as f:
+            with open(full_path, 'wb') as f:
                 f.write(final_data)
         
-        print(f"Successfully generated JPG file: {file_path} ({size_kb} KB)")
+        print(f"Successfully generated JPG file: {full_path} ({size_kb} KB)")
         
     except Exception as e:
         print(f"Error generating JPG file: {e}")
