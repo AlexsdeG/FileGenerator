@@ -2,6 +2,9 @@
 
 A Python-based command-line interface tool for generating various types of files with random data for testing and demonstration purposes.
 
+
+![App Screenshot](https://github.com/AlexsdeG/FileGenerator/blob/main/FileGenerator.png)
+
 ## Features
 
 - Generate multiple file types including:
